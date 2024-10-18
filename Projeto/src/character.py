@@ -1,4 +1,4 @@
-# src/character.py
+
 
 class Character:
     def __init__(self, name, character_class, level):
