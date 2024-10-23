@@ -1,7 +1,7 @@
 from random import randint
 
 #This class contains random value elements, therefore it is tested manually
-class Dice:
+class Utils:
     """
         Contains lots of usefull and common use stuff, like roll dice
     """
@@ -25,11 +25,33 @@ class Dice:
         values = []
 
         if quantity == 1:
+            return randint(lower_bound, upper_bound)
+        elif quantity == -1:
             values.append(randint(lower_bound, upper_bound))
-        elif quantity == -1 or quantity == 2:
+            values.append(randint(lower_bound, upper_bound))
+        
+            return max(values)
+        elif quantity == 2:
             values.append(randint(lower_bound, upper_bound))
             values.append(randint(lower_bound, upper_bound))
+        
+            return min(values)
         else:
             return -1
-            
 
+class Dice:
+    def __init__(self, sides:int):
+        self.sides = sides
+
+        self.__check_valid_instance()
+
+
+    def __check_valid_instance(self):
+        valid_sides = [3,4,5,6,8,10,12,20,100]
+
+        if self.sides not in valid_sides:
+            raise Exception
+
+    def __repr__(self):
+        return f"d{self.sides}"
+    
