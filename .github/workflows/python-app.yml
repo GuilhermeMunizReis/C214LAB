@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests with unittest
       run: |
-        python -m unittest discover -s test -p "*Test.py"
+        python -m unittest discover -s projeto/test -p "*Test.py"
