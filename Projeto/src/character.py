@@ -1,11 +1,18 @@
 from player_classes import *
 
 class Character:
-    def __init__(self, name:str, character_class:Character_Class_ABC, character_multiclass:list[Character_Class_ABC], level:int):
+    def __init__(self, name:str, race:str, level:int):
         self.name = name
-        self.character_class = character_class
-        self.character_multiclass = character_multiclass
+        self.race = race
+        self.character_class = []
+        self.character_multiclass = []
         self.level = level
+        self.proficiencies = []
+        self.feats = []
+        self.saving_throws = []
+        self.prof_weapon = ""
+        self.prof_armor = ""
+        self.prof_bonus = 0
         self.str_base = 1
         self.dex_base = 1
         self.con_base = 1
