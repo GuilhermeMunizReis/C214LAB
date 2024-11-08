@@ -26,4 +26,4 @@ class FighterClass(ClassRole):
             case 0:
                 self.character.prof_bonus = 2
                 self.character.proficiencies = ["Athletics", "Intimidation"]
-                self.feats.append("Fighting style - Archer", "Retake Breath")
+                self.feats.extended("Fighting style - Archer", "Retake Breath")
