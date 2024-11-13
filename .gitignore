@@ -31,4 +31,6 @@ cover/
 # PyBuilder
 .pybuilder/
 target/
- 
+
+# PyTest cache
+.pytest_cache/
