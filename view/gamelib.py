@@ -3,10 +3,10 @@ NAME
     gamelib 
 
 VERSION
-    0.6.1
+    0.6.2
 
 DATE
-    28/07/2023 - 22/04/2024
+    22/04/2024 - 01/11/2024
 
 AUTHOR
     Guilherme Muniz de Oliveira Reis
@@ -27,7 +27,7 @@ import pygame
 
 pygame.init()
 pygame.font.init()
-FONT = pygame.font.SysFont("Verdana", 20)
+FONT = pygame.font.SysFont("Times New Roman", 15)
 pygame.key.set_repeat(500,35)
 
 class Widget:
