@@ -4,6 +4,8 @@ class Character:
     def __init__(self, name:str, race:str, level:int):
         self.name = name
         self.race = race
+        self.hp = 0
+        self.ac = 10
         self.character_class = []
         self.character_multiclass = []
         self.level = level
@@ -31,6 +33,8 @@ class Character:
         self.int_current = 1
         self.wis_current = 1
         self.cha_current = 1    
+
+        self.get_character_level()
         
     def get_character_level(self):
         level = 0
@@ -41,3 +45,11 @@ class Character:
             level += c.level
 
         self.level = level
+
+    def __update_character_status(self):
+        """
+        Apply all attribute and values modifiers from feats
+        """
+
+        for f in self.feats:
+            f.modify_character()

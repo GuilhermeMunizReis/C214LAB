@@ -21,7 +21,7 @@ class FighterClass(ClassRole):
         self.level = level
         self.life_die = Dice(10)
 
-    def level_up(self, proficiencies: str, feats: str):
+    def level_up(self, proficiencies: list, feats: str):
         match self.level:
             case 0:
                 self.character.prof_bonus = 2
