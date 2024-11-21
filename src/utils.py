@@ -1,4 +1,9 @@
 from random import randint
+import pandas as pd
+
+import sys
+
+sys.path.append('data')
 
 #This class contains random value elements, therefore it is tested manually
 class Utils:
@@ -50,7 +55,7 @@ class GlobalItens:
         self.__load_itens_from_csv()
 
     def __load_itens_from_csv(self):
-        pass
+        self.all_itens = pd.read_csv('itens.csv', delimiter=';')
 
 class Dice:
     """
