@@ -39,18 +39,43 @@ class Utils:
         else:
             return -1
 
+class GlobalItens:
+    """
+    This class contains all possible itens on the world
+    """
+
+    def __init__(self):
+        self.all_itens = []
+
+        self.__load_itens_from_csv()
+
+    def __load_itens_from_csv(self):
+        pass
+
 class Dice:
+    """
+    Represents a dice 
+    """
+
     def __init__(self, sides:int):
         self.sides = sides
 
         self.__check_valid_instance()
-
 
     def __check_valid_instance(self):
         valid_sides = [3,4,5,6,8,10,12,20,100]
 
         if self.sides not in valid_sides:
             raise Exception
+
+    def roll_dice(self):
+        return randint(1, self.sides)
+
+    def roll_advantage(self):
+        return max([randint(1, self.sides), randint(1, self.sides)])
+
+    def roll_disadvantage(self):
+        return min([randint(1, self.sides), randint(1, self.sides)])
 
     def __repr__(self):
         return f"d{self.sides}"

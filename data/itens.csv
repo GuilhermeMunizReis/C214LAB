@@ -1,0 +1,4 @@
+id;name;preco;dano;props;desc;
+001;Adaga;2000;1d4 perfurante;Acuidade, leve, arremesso(6/18);Adaga comum;
+002;Azagaia;50;1d6 perfurante;Arremesso (distância 9/36);Azagaia comum;
+003;Bordão;200;1d6;concussão;Versátil (1d8);bastão comum;
