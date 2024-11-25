@@ -2,7 +2,7 @@ import sys
 
 sys.path.append("view")
 
-from app import *
+from view.app import *
 
 if __name__ == "__main__":
     app = App()

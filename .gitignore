@@ -34,3 +34,7 @@ target/
 
 # PyTest cache
 .pytest_cache/
+
+# Build
+build/
+dist/
