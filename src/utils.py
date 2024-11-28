@@ -46,10 +46,35 @@ class Utils:
         
     @staticmethod
     def load_market(market_id):
-        """
-        TO BE IMPLEMENTED
-        """
-        pass
+
+        try:
+            markets = pd.read_csv('markets.csv', delimiter=';')
+            itens = pd.read_csv('itens.csv', delimiter=';')
+
+            market = markets[markets['id'] == str(market_id)]
+
+            if market.empty:
+                raise ValueError(f"Mercado com ID {market_id} não encontrado.")
+            
+            iten_ids = market['itens'].iloc[0].split('-')
+
+            market_itens = itens[itens['id'].isin(iten_ids)]
+
+            shop = {
+                "market_id": market_id,
+                "market_name": market['name'].iloc[0],
+                "owner": market['owner'].iloc[0],
+                "items": market_itens.to_dict(orient='records')
+            }
+            
+            return shop
+        except FileNotFoundError as e:
+            print(f"Arquivo não encontrado: {e}")
+        except pd.errors.EmptyDataError:
+            print("O arquivo CSV está vazio ou faltando colunas necessárias.")
+        except Exception as e:
+            print(f"Erro ao carregar o mercado: {e}")
+        return None
 
 class GlobalItens:
     """
@@ -67,9 +92,13 @@ class GlobalItens:
         self.all_itens = pd.read_csv('itens.csv', delimiter=';')
 
     def __load_market_ids(self):
-        """
-        TO BE IMPLEMENTED
-        """
+        try:
+            markets = pd.read_csv('markets.csv', delimiter=';')
+
+            # Obtém os IDs dos mercados
+            self.market_ids = markets['id'].tolist()
+        except Exception as e:
+            print(f"Erro ao carregar os IDs dos mercados: {e}")
         pass
 
 class Dice:
