@@ -1,9 +1,10 @@
 from currency import *
 
 class Item:
-    def __init__(self, name: str, desc:str, price: Currency):
+    def __init__(self, name: str, damage:str, props:str, price: Currency):
         self.name = name
-        self.desc = desc
+        self.damage = damage
+        self.props = props
         self.price = price
 
     

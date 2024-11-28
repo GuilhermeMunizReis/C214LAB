@@ -1,5 +1,6 @@
 from random import randint
 import pandas as pd
+from shop import *
 
 import sys
 
@@ -51,35 +52,32 @@ class Utils:
             markets = pd.read_csv('data/markets.csv', delimiter=';')
             itens = pd.read_csv('data/itens.csv', delimiter=';')
 
-        market = markets[markets['id'] == str(market_id)]
+            market = markets[markets['market_id'] == market_id]
 
-        if market.empty:
-            raise ValueError(f"Mercado com ID {market_id} não encontrado.")
+            if market.empty:
+                raise ValueError(f"Mercado com ID {market_id} não encontrado.")
 
-        iten_ids = market['itens'].iloc[0].strip(';').split('-') 
+            item_ids = market['itens'].iloc[0].strip(';').split('-')
 
-        itens['id'] = itens['id'].astype(str)  
+            for i in range(len(item_ids)):
+                item_ids[i] = int(item_ids[i])
 
+            market_itens = itens[itens['item_id'].isin(item_ids)]
 
-        market_itens = itens[itens['market_id'].isin(iten_ids)]
+            shop = Shop(market['name'].iloc[0], market['owner'].iloc[0])
 
+            for _, row in market_itens.iterrows():
+                shop.add_item(Item(row['name'], row['damage'], row['props'], Currency("Ardin", "ards", 10)))
 
-        shop = {
-            "market_id": market_id,
-            "market_name": market['name'].iloc[0],
-            "owner": market['owner'].iloc[0],
-            "items": market_itens.to_dict(orient='records')
-        }
+            return shop
 
-        return shop
-
-    except FileNotFoundError as e:
-        print(f"Arquivo não encontrado: {e}")
-    except pd.errors.EmptyDataError:
-        print("O arquivo CSV está vazio ou faltando colunas necessárias.")
-    except Exception as e:
-        print(f"Erro ao carregar o mercado: {e}")
-    return None
+        except FileNotFoundError as e:
+            print(f"Arquivo não encontrado: {e}")
+        except pd.errors.EmptyDataError:
+            print("O arquivo CSV está vazio ou faltando colunas necessárias.")
+        #except Exception as e:
+        #    print(f"Erro ao carregar o mercado: {e}")
+        return None
 
 class GlobalItens:
     """
@@ -135,5 +133,4 @@ class Dice:
     
 
 gi = GlobalItens()
-print(gi.market_ids)
 print(Utils.load_market(gi.market_ids[0]))

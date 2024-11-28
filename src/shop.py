@@ -19,5 +19,11 @@ class Shop:
         Shows every item on shop
         """
         for i in self.itens:
-            s = f"{i.name} - {i.currency.price.value} {i.currency.price.shortname}"
+            s = f"{i.name} - {i.price.value} {i.price.shortname}"
             print(s)
+    
+    def __repr__(self):
+        print(f"{self.name} - {self.owner}\t")
+        self.print_item_list()
+
+        return ""
