@@ -21,24 +21,3 @@ class Currency:
     #Retorna uma string representando a moeda, incluindo seu nome, abreviação e valor.
     def __str__(self):
         return f"{self.name} ({self.shortname}): {self.value}"
-    
-
-if __name__ == "__main__":
-    # Criando uma instância de moeda
-    gold = Currency("Gold", "GP", 100.0)
-    
-    print(gold)  
-
-    gold.set_value(150.0)
-    print(gold)  
-    
-
-    gold.add_value(50.0)
-    print(gold)  
-    
-
-    gold.subtract_value(75.0)
-    print(gold)  
-    
-
-    gold.subtract_value(200.0)  

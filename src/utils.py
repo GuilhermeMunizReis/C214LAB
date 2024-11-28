@@ -43,6 +43,13 @@ class Utils:
             return min(values)
         else:
             return -1
+        
+    @staticmethod
+    def load_market(market_id):
+        """
+        TO BE IMPLEMENTED
+        """
+        pass
 
 class GlobalItens:
     """
@@ -51,11 +58,19 @@ class GlobalItens:
 
     def __init__(self):
         self.all_itens = []
+        self.market_ids = []
 
         self.__load_itens_from_csv()
+        self.__load_market_ids()
 
     def __load_itens_from_csv(self):
         self.all_itens = pd.read_csv('itens.csv', delimiter=';')
+
+    def __load_market_ids(self):
+        """
+        TO BE IMPLEMENTED
+        """
+        pass
 
 class Dice:
     """
