@@ -48,17 +48,17 @@ class Utils:
     def load_market(market_id):
 
         try:
-            markets = pd.read_csv('markets.csv', delimiter=';')
-            itens = pd.read_csv('itens.csv', delimiter=';')
+            markets = pd.read_csv('data/markets.csv', delimiter=';')
+            itens = pd.read_csv('data/itens.csv', delimiter=';')
 
-            market = markets[markets['id'] == str(market_id)]
+            market = markets[markets['market_id'] == str(market_id)]
 
             if market.empty:
                 raise ValueError(f"Mercado com ID {market_id} não encontrado.")
             
             iten_ids = market['itens'].iloc[0].split('-')
 
-            market_itens = itens[itens['id'].isin(iten_ids)]
+            market_itens = itens[itens['market_id'].isin(iten_ids)]
 
             shop = {
                 "market_id": market_id,
@@ -89,17 +89,16 @@ class GlobalItens:
         self.__load_market_ids()
 
     def __load_itens_from_csv(self):
-        self.all_itens = pd.read_csv('itens.csv', delimiter=';')
+        self.all_itens = pd.read_csv('data/itens.csv', delimiter=';')
 
     def __load_market_ids(self):
         try:
-            markets = pd.read_csv('markets.csv', delimiter=';')
+            markets = pd.read_csv('data/markets.csv', delimiter=';')
 
             # Obtém os IDs dos mercados
-            self.market_ids = markets['id'].tolist()
+            self.market_ids = markets['market_id'].tolist()
         except Exception as e:
             print(f"Erro ao carregar os IDs dos mercados: {e}")
-        pass
 
 class Dice:
     """
@@ -129,3 +128,7 @@ class Dice:
     def __repr__(self):
         return f"d{self.sides}"
     
+
+gi = GlobalItens()
+print(gi.market_ids)
+print(Utils.load_market(gi.market_ids[0]))
