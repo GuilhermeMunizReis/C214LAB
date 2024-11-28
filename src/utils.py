@@ -91,6 +91,9 @@ class GlobalItens:
         self.__load_itens_from_csv()
         self.__load_market_ids()
 
+    def get_shop(self, shop_id: int):
+        return Utils.load_market(shop_id)
+
     def __load_itens_from_csv(self):
         self.all_itens = pd.read_csv('data/itens.csv', delimiter=';')
 
@@ -131,6 +134,3 @@ class Dice:
     def __repr__(self):
         return f"d{self.sides}"
     
-
-gi = GlobalItens()
-print(Utils.load_market(gi.market_ids[0]))

@@ -5,12 +5,16 @@ sys.path.append('src')
 from gamelib import *
 from shop import *
 from market_mock import *
+from utils import *
 
 class App:
     def __init__(self):
         self.app = Game(resolution=(1200,700))
-        self.shop = get_shop_std()
+        self.global_itens = GlobalItens()
+        self.shop = self.global_itens.get_shop(1)
         self.screen = "market"              #Screen will be stored here
+        self.page = 1
+        self.market_total_itens = len(self.shop.itens)
      
     def start(self):
         self.set_screen()
@@ -41,19 +45,22 @@ class App:
         price_item = Label(text="Price", x=690, y=90, height=30, width=200)
         screen.add(price_item)
 
+        lower_bound = self.page * 13 - 13
+        upper_bound = min(self.page * 13, self.market_total_itens)
 
         cont = 1
-        for item in self.shop.itens:
+        for i in range(lower_bound, upper_bound):
             new_y = 90 + cont*40
-            
+            item = self.shop.itens[i]
+
             name = Label(text=item.name, x=50, y=new_y, height=30, width=200)
             screen.add(name)
 
-            desc = Label(text=item.desc, x=300, y=new_y, height=30, width=400)
+            desc = Label(text=item.damage, x=270, y=new_y, height=30, width=400)
             screen.add(desc)
 
             p_str = f"{item.price.value} {item.price.shortname}"
-            price = Label(text=p_str, x=750, y=new_y, height=30, width=200)
+            price = Label(text=p_str, x=690, y=new_y, height=30, width=200)
             screen.add(price)
 
             cont += 1
