@@ -11,9 +11,9 @@ class TestShop(unittest.TestCase):
         self.c2 = Currency("Ardin", "ard", 40)
         self.c3 = Currency("Ardin", "ard", 50)
         
-        self.i1 = Item("Sword", "1d6 damage", self.c1)
-        self.i2 = Item("Axe", "1d8 damage", self.c2)
-        self.i3 = Item("Mace", "1d6 damage", self.c3)
+        self.i1 = Item("Sword", "1d6 damage", "Finesse", self.c1)
+        self.i2 = Item("Axe", "1d8 damage", "Finesse", self.c2)
+        self.i3 = Item("Mace", "1d6 damage", "Finesse", self.c3)
 
         self.shop_list = [] 
         self.shop_list.append(self.i1)
