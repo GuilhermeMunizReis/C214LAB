@@ -51,30 +51,35 @@ class Utils:
             markets = pd.read_csv('data/markets.csv', delimiter=';')
             itens = pd.read_csv('data/itens.csv', delimiter=';')
 
-            market = markets[markets['market_id'] == str(market_id)]
+        market = markets[markets['id'] == str(market_id)]
 
-            if market.empty:
-                raise ValueError(f"Mercado com ID {market_id} não encontrado.")
-            
-            iten_ids = market['itens'].iloc[0].split('-')
+        if market.empty:
+            raise ValueError(f"Mercado com ID {market_id} não encontrado.")
 
-            market_itens = itens[itens['market_id'].isin(iten_ids)]
+        iten_ids = market['itens'].iloc[0].strip(';').split('-') 
 
-            shop = {
-                "market_id": market_id,
-                "market_name": market['name'].iloc[0],
-                "owner": market['owner'].iloc[0],
-                "items": market_itens.to_dict(orient='records')
-            }
-            
-            return shop
-        except FileNotFoundError as e:
-            print(f"Arquivo não encontrado: {e}")
-        except pd.errors.EmptyDataError:
-            print("O arquivo CSV está vazio ou faltando colunas necessárias.")
-        except Exception as e:
-            print(f"Erro ao carregar o mercado: {e}")
-        return None
+        itens['id'] = itens['id'].astype(str)  
+
+
+        market_itens = itens[itens['market_id'].isin(iten_ids)]
+
+
+        shop = {
+            "market_id": market_id,
+            "market_name": market['name'].iloc[0],
+            "owner": market['owner'].iloc[0],
+            "items": market_itens.to_dict(orient='records')
+        }
+
+        return shop
+
+    except FileNotFoundError as e:
+        print(f"Arquivo não encontrado: {e}")
+    except pd.errors.EmptyDataError:
+        print("O arquivo CSV está vazio ou faltando colunas necessárias.")
+    except Exception as e:
+        print(f"Erro ao carregar o mercado: {e}")
+    return None
 
 class GlobalItens:
     """
