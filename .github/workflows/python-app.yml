@@ -34,12 +34,15 @@ jobs:
         mkdir -p test-reports 
         python -m unittest discover -s test -p "*_test.py"
 
+    - name: List test-reports directory
+      run: ls -l test-reports
+
     - name: Upload test reports
       uses: actions/upload-artifact@v3
       with:
         name: test-reports
         path: test-reports
-        
+
   build:
     runs-on: ubuntu-latest
 
