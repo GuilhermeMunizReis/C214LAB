@@ -32,9 +32,6 @@ jobs:
         mkdir -p test-reports
         python test/relatorio.py  # Executa o script relatorio.py que gera o XML
 
-    - name: List test-reports directory
-      run: ls -l test-reports
-
     - name: Upload test reports
       uses: actions/upload-artifact@v4
       with:
