@@ -69,7 +69,7 @@ jobs:
 
     # Fazer upload do executável como artefato
     - name: Upload executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: my_python_executable
         path: dist/main
