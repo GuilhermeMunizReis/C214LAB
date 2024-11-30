@@ -4,7 +4,6 @@ sys.path.append('src')
 
 from gamelib import *
 from shop import *
-from market_mock import *
 from utils import *
 from functools import partial
 
