@@ -1,5 +1,4 @@
 import unittest
-import xmlrunner
 import sys
 
 sys.path.append('src')
@@ -28,6 +27,7 @@ class TestCurrency(unittest.TestCase):
 
         self.assertEqual(c.value, 20.0)
         
+
     # Testando a adição de valor à moeda
     def testAddValue(self):
         c = Currency("Gold", "GP", 50.0)
@@ -56,9 +56,5 @@ class TestCurrency(unittest.TestCase):
 
         self.assertEqual(c.value, 0.0) 
 
-if __name__ == "__main__":
-    # Descobrir e executar todos os testes
-    tests = unittest.TestLoader().discover(".")
-    # Gerar relatório em formato XML na pasta `test-reports`
-    with open('test-reports/results.xml', 'wb') as output:
-        xmlrunner.XMLTestRunner(output=output).run(tests)
+if __name__ == '__main__':  
+    unittest.main()
