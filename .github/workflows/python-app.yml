@@ -30,7 +30,7 @@ jobs:
     - name: Run tests and generate XML report using relatorio.py
       run: |
         mkdir -p test-reports
-        python test/relatorio.py  # Executa o script relatorio.py que gera o XML
+        python test/relatorio_test.py  # Executa o script relatorio.py que gera o XML
 
     - name: Upload test reports
       uses: actions/upload-artifact@v4
