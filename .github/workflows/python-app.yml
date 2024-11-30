@@ -26,22 +26,22 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install unittest-xml-reporting
-
+        pip install unittest-xml-reporting  # Instalar dependências para gerar o relátorio em XML
 
     - name: Run tests with unittest
       run: |
-        mkdir -p test-reports 
-        python -m unittest discover -s test -p "*_test.py"
+        mkdir -p test-reports
+        # Gerar o relatório de testes em formato XML e salvar na pasta test-reports
+        python -m unittest discover -s test -p "*_test.py" > test-reports/report.xml
 
     - name: List test-reports directory
-      run: ls -l test-reports
+      run: ls -l test-reports  # Verifica se o relatório foi criado corretamente
 
     - name: Upload test reports
       uses: actions/upload-artifact@v3
       with:
         name: test-reports
-        path: test-reports
+        path: test-reports/report.xml  # Upload do arquivo report.xml específico
 
   build:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'  # Defina a versão do Python que você deseja usar
+        python-version: '3.10'
 
     # Instalar dependências do requirements.txt
     - name: Install dependencies
@@ -69,7 +69,7 @@ jobs:
 
     # Fazer upload do executável como artefato
     - name: Upload executable
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: my_python_executable
         path: dist/main
