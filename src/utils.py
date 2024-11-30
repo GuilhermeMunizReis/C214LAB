@@ -56,7 +56,7 @@ class Utils:
 
             if market.empty:
                 raise ValueError(f"Mercado com ID {market_id} não encontrado.")
-
+            
             item_ids = market['itens'].iloc[0].strip(';').split('-')
 
             for i in range(len(item_ids)):
@@ -67,16 +67,15 @@ class Utils:
             shop = Shop(market['name'].iloc[0], market['owner'].iloc[0])
 
             for _, row in market_itens.iterrows():
-                shop.add_item(Item(row['name'], row['damage'], row['props'], Currency("Ardin", "ards", 10)))
+                shop.add_item(Item(row['name'], row['damage'], row['props'], Currency("Ardin", "ards", row['price']/100)))
 
+            shop.clear_repeated_elements()
             return shop
 
         except FileNotFoundError as e:
             print(f"Arquivo não encontrado: {e}")
         except pd.errors.EmptyDataError:
             print("O arquivo CSV está vazio ou faltando colunas necessárias.")
-        #except Exception as e:
-        #    print(f"Erro ao carregar o mercado: {e}")
         return None
 
 class GlobalItens:
@@ -86,12 +85,12 @@ class GlobalItens:
 
     def __init__(self):
         self.all_itens = []
-        self.market_ids = []
+        self.market_ids = {}
 
         self.__load_itens_from_csv()
         self.__load_market_ids()
 
-    def get_shop(self, shop_id: int):
+    def get_shop(self, shop_id: int) -> Shop:
         return Utils.load_market(shop_id)
 
     def __load_itens_from_csv(self):
@@ -102,7 +101,7 @@ class GlobalItens:
             markets = pd.read_csv('data/markets.csv', delimiter=';')
 
             # Obtém os IDs dos mercados
-            self.market_ids = markets['market_id'].tolist()
+            self.market_ids = markets.set_index('market_id')["name"].to_dict()
         except Exception as e:
             print(f"Erro ao carregar os IDs dos mercados: {e}")
 

@@ -1,4 +1,4 @@
-item_id;type;name;preco;damage;props;desc
+item_id;type;name;price;damage;props;desc
 001;ascn;Adaga;2000;1d4 perfurante;Acuidade, leve, arremesso(6/18);-
 002;ascn;Azagaia;50;1d6 perfurante;Arremesso (distância 9/36);-
 003;ascn;Bordão;200;1d6 concussão;Versátil (1d8);-

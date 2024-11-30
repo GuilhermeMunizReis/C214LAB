@@ -20,12 +20,18 @@ class TestShop(unittest.TestCase):
         self.shop_list.append(self.i2)
 
     def testShopInstance(self):
-        s = Shop("Crippled Hunter", "Marquito", self.shop_list)
+        s = Shop("Crippled Hunter", "Marquito")
+
+        for i in self.shop_list:
+            s.add_item(i)
 
         self.assertEqual(s.itens, self.shop_list)
 
     def testShopAddItem(self):
-        s = Shop("Crippled Hunter", "Marquito", self.shop_list)
+        s = Shop("Crippled Hunter", "Marquito")
+
+        for i in self.shop_list:
+            s.add_item(i)
 
         shop_list_test = self.shop_list.copy()
 
@@ -36,7 +42,10 @@ class TestShop(unittest.TestCase):
         self.assertEqual(s.itens, shop_list_test)
     
     def testShopAddItemError(self):
-        s = Shop("Crippled Hunter", "Marquito", self.shop_list)
+        s = Shop("Crippled Hunter", "Marquito")
+
+        for i in self.shop_list:
+            s.add_item(i)
 
         shop_list_test = self.shop_list.copy()
 
